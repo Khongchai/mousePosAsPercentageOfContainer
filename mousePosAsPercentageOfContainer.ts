@@ -1,20 +1,22 @@
 export default function returnMousePositionAsPercentageOfContainer(
-  //clientX
-  mouseClientX: number,
-  //getBoundingClientRect().x
-  containerBoundingX: number,
-  //clientWidth
-  containerWidth: number
+  //clientX or ClientY
+  mouseClient: number,
+  //getBoundingClientRect().x or getBoundingClientRect().y
+  containerBoundingRect: number,
+  //clientWidth or ClientHeight
+  containerSize: number
 ) {
+  /*
+    Remove the toFixed and the percentage if you just want the value as a number
+  */
   const percentage =
     (
       inverseLerp(
-        containerBoundingX,
-        containerBoundingX + containerWidth,
-        mouseClientX
+        containerBoundingRect,
+        containerBoundingRect + containerSize,
+        mouseClient
       ) * 100
     ).toFixed(2) + "%";
-  console.log(percentage);
 }
 
 function inverseLerp(x: number, y: number, v: number) {
